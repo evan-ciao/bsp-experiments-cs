@@ -32,6 +32,7 @@ class Program
         if (model.MeshCount < 1)
             return;
 
+        // load first mesh model
         List<Triangle> triangles = new();
         unsafe
         {
@@ -59,17 +60,17 @@ class Program
                 triangles.Add(triangle);
             }
         }
-
         Console.WriteLine($"triangles count {triangles.Count}");
 
         // imgui
         rlImGui.Setup(true);
 
-        // test BSP
-        BSPNode tree = BSPTree.CreateBSPTree(triangles);
+        // bsp
+        int depth = 0;
+        Random rnd = new();
 
-        Triangle triangleVisited = new();
-        int triangleVisitedIndex = 0;
+        BSPNode root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
+        BSPNode tree = root;
         
         while (!Raylib.WindowShouldClose())
         {
@@ -80,24 +81,6 @@ class Program
             Raylib.ClearBackground(Color.White);
 
             Raylib.BeginMode3D(camera);
-
-            //Raylib.DrawGrid(10, 1);
-
-            /*
-            foreach (var triangle in triangles)
-            {
-                Raylib.DrawLine3D(triangle.v1, triangle.v2, Color.Black);
-                Raylib.DrawLine3D(triangle.v3, triangle.v2, Color.Black);
-                Raylib.DrawLine3D(triangle.v3, triangle.v1, Color.Black);
-
-                Vector3 center = (triangle.v1 + triangle.v2 + triangle.v3) / 3;
-                Raylib.DrawLine3D(
-                    center,
-                    center + triangle.normal,
-                    Color.Red
-                );
-            }
-            */
 
             foreach (var triangle in tree.front)
             {
@@ -125,43 +108,43 @@ class Program
                 );
             }
 
-            int bspTriangles = tree.front.Count + tree.back.Count + tree.coplanar.Count - 1;
-
-            if (triangleVisitedIndex >= 0 && triangleVisitedIndex < tree.front.Count)
-                triangleVisited = tree.front[triangleVisitedIndex];
-
-            if (triangleVisitedIndex >= tree.front.Count && triangleVisitedIndex < tree.front.Count + tree.back.Count)
-                triangleVisited = tree.back[triangleVisitedIndex - tree.front.Count];
-            
-            if (triangleVisitedIndex >= tree.front.Count + tree.back.Count && triangleVisitedIndex < bspTriangles)
-                triangleVisited = tree.coplanar[triangleVisitedIndex - tree.front.Count - tree.back.Count];
-            
-
-            Raylib.DrawTriangle3D(triangleVisited.v1, triangleVisited.v2, triangleVisited.v3, Color.Red);
-            Raylib.DrawTriangle3D(triangleVisited.v1, triangleVisited.v3, triangleVisited.v2, Color.Red);
-
             Raylib.EndMode3D();
 
             rlImGui.Begin();
             ImGui.Begin("navigator 3000");
-            ImGui.Text($"bsp triangles {bspTriangles + 1}");
-            ImGui.SliderInt("triangle visited", ref triangleVisitedIndex, 0, bspTriangles);
+
+            if (ImGui.Button("new bsp"))
+            {
+                depth = 0;
+                root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
+                tree = root;
+            }
+
+            ImGui.Spacing();
+            ImGui.Text($"depth {depth}");
 
             if (tree.frontNode != null && !tree.frontNode.isLeaf)
             {
-                if (ImGui.Button("go front nodes"))
+                if (ImGui.Button("go to front"))
                 {
                     tree = tree.frontNode;
                 }
             }
             if (tree.backNode != null && !tree.backNode.isLeaf)
             {
-                if (ImGui.Button("go back node"))
+                if (ImGui.Button("go to back"))
                 {
                     tree = tree.backNode;
                 }
             }
-                
+            if (tree != root)
+            {
+                if (ImGui.Button("go back to root"))
+                {
+                    tree = root;
+                }
+            }
+
             ImGui.End();
 
             rlImGui.End();
