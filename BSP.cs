@@ -11,14 +11,14 @@ enum VertexClassification
 
 class BSPTree
 {
-    static private float SignedDistance(Vector3 p, Vector3 n, float d)
+    static public float PlaneSignedDistance(Vector3 p, Vector3 n, float d)
     {
         return Vector3.Dot(n, p) + d;
     }
 
     static private int ClassifyVertex(Vector3 p, Vector3 n, float d, float eps = 1e-6f)
     {
-        float dist = SignedDistance(p, n, d);
+        float dist = PlaneSignedDistance(p, n, d);
 
         if (dist > eps)
             return (int)VertexClassification.FRONT;
@@ -37,8 +37,8 @@ class BSPTree
             Vector3 A = poly[i];
             Vector3 B = poly[(i + 1) % count];
 
-            float da = SignedDistance(A, n, d);
-            float db = SignedDistance(B, n, d);
+            float da = PlaneSignedDistance(A, n, d);
+            float db = PlaneSignedDistance(B, n, d);
 
             bool aIn = (keepFront ? (da >= 0) : (da <= 0));
             bool bIn = (keepFront ? (db >= 0) : (db <= 0));

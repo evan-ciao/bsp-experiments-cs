@@ -71,11 +71,53 @@ class Program
 
         BSPNode root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
         BSPNode tree = root;
+
+        // sphere test
+        bool sphereTest = false;
+        bool sphereCollision = false;
+        Vector3 spherePosition = new Vector3(0, 3, 0);
+        float sphereRadius = 1;
+
+        Vector3 collisionN = Vector3.Zero;
+        float penetration = 0;
+
+        BSPNode debugNode = tree;
         
         while (!Raylib.WindowShouldClose())
         {
+            float delta = Raylib.GetFrameTime();
+
             if (Raylib.IsMouseButtonDown(MouseButton.Right))
                 Raylib.UpdateCamera(ref camera, CameraMode.Free);
+
+            if (sphereTest)
+            {
+                spherePosition.Y -= 9.8f * delta;
+
+                Vector2 movement = Vector2.Zero;
+                if (Raylib.IsKeyDown(KeyboardKey.Up))
+                    movement.Y = 1;
+                if (Raylib.IsKeyDown(KeyboardKey.Down))
+                    movement.Y = -1;
+                if (Raylib.IsKeyDown(KeyboardKey.Right))
+                    movement.X = 1;
+                if (Raylib.IsKeyDown(KeyboardKey.Left))
+                    movement.X = -1;
+
+                spherePosition.Z -= movement.Y * 3 * delta;
+                spherePosition.X += movement.X * 3 * delta;
+
+                sphereCollision = BSPTraverse.SphereTest(root, ref debugNode, spherePosition, sphereRadius, ref collisionN, ref penetration);
+
+                // simple resolve
+                spherePosition += collisionN * penetration;
+
+                tree = debugNode;
+            }
+            else
+            {
+                tree = root;
+            }
 
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.White);
@@ -107,6 +149,8 @@ class Program
                     Color.Red
                 );
             }
+
+            Raylib.DrawSphereWires(spherePosition, sphereRadius, 6, 6, sphereCollision ? Color.Red : Color.Yellow);
 
             Raylib.EndMode3D();
 
@@ -143,6 +187,15 @@ class Program
                 {
                     tree = root;
                 }
+            }
+
+            ImGui.Spacing();
+            ImGui.Checkbox("sphere test", ref sphereTest);
+
+            if (sphereTest)
+            {
+                ImGui.SliderFloat("radius", ref sphereRadius, 0.1f, 2f);
+                ImGui.Text("use arrow keys to move around");
             }
 
             ImGui.End();
