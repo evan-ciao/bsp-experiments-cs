@@ -13,9 +13,12 @@ struct Triangle
 
 class Program
 {
+    // lazy
+    public static List<Vector3> centroids = new();
+
     public static void Main()
     {
-        Raylib.InitWindow(800, 480, "BSP baking");
+        Raylib.InitWindow(1280, 720, "BSP baking");
 
         Camera3D camera = new(
             new Vector3(0, 2, 2),
@@ -28,7 +31,7 @@ class Program
         // relative path won't work. great
         Model model = Raylib.LoadModel("/home/evan/Documents/bsp-experiments-cs/models/test-scene.obj");
         Console.WriteLine(model.MeshCount);
-        
+
         if (model.MeshCount < 1)
             return;
 
@@ -70,19 +73,14 @@ class Program
         Random rnd = new();
 
         BSPNode root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
+        BSPTree.BuildBSPLeaves(ref root);
+
         BSPNode tree = root;
 
-        // sphere test
-        bool sphereTest = false;
-        bool sphereCollision = false;
-        Vector3 spherePosition = new Vector3(0, 3, 0);
-        float sphereRadius = 1;
+        // point test traversal
+        Vector3 point = Vector3.Zero;
+        BSPNodeState pointState = BSPNodeState.UNASSIGNED;
 
-        Vector3 collisionN = Vector3.Zero;
-        float penetration = 0;
-
-        BSPNode debugNode = tree;
-        
         while (!Raylib.WindowShouldClose())
         {
             float delta = Raylib.GetFrameTime();
@@ -90,34 +88,20 @@ class Program
             if (Raylib.IsMouseButtonDown(MouseButton.Right))
                 Raylib.UpdateCamera(ref camera, CameraMode.Free);
 
-            if (sphereTest)
-            {
-                spherePosition.Y -= 9.8f * delta;
-
-                Vector2 movement = Vector2.Zero;
-                if (Raylib.IsKeyDown(KeyboardKey.Up))
-                    movement.Y = 1;
-                if (Raylib.IsKeyDown(KeyboardKey.Down))
-                    movement.Y = -1;
-                if (Raylib.IsKeyDown(KeyboardKey.Right))
-                    movement.X = 1;
-                if (Raylib.IsKeyDown(KeyboardKey.Left))
-                    movement.X = -1;
-
-                spherePosition.Z -= movement.Y * 3 * delta;
-                spherePosition.X += movement.X * 3 * delta;
-
-                sphereCollision = BSPTraverse.SphereTest(root, ref debugNode, spherePosition, sphereRadius, ref collisionN, ref penetration);
-
-                // simple resolve
-                spherePosition += collisionN * penetration;
-
-                tree = debugNode;
-            }
-            else
-            {
-                tree = root;
-            }
+            // traverse point
+            //pointState = BSPTraverse.TraversePoint(root, point);
+            if (Raylib.IsKeyDown(KeyboardKey.Up))
+                point.Z -= 2 * delta;
+            if (Raylib.IsKeyDown(KeyboardKey.Down))
+                point.Z += 2 * delta;
+            if (Raylib.IsKeyDown(KeyboardKey.Right))
+                point.X += 2 * delta;
+            if (Raylib.IsKeyDown(KeyboardKey.Left))
+                point.X -= 2 * delta;
+            if (Raylib.IsKeyDown(KeyboardKey.PageUp))
+                point.Y += 2 * delta;
+            if (Raylib.IsKeyDown(KeyboardKey.PageDown))
+                point.Y -= 2 * delta;
 
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.White);
@@ -150,39 +134,50 @@ class Program
                 );
             }
 
-            Raylib.DrawSphereWires(spherePosition, sphereRadius, 6, 6, sphereCollision ? Color.Red : Color.Yellow);
+            Raylib.DrawSphere(point, 0.05f, pointState == BSPNodeState.SOLID ? Color.Red : Color.Green);
+
+            // try drawing centroids
+            foreach (var centroid in centroids)
+            {
+                Raylib.DrawSphere(centroid, 0.05f, Color.Blue);
+            }
+            // aaaaa
+            if (tree.isLeaf)
+            {
+                Raylib.DrawSphere(tree.leaf.centroid, 0.08f, Color.DarkPurple);
+            }
 
             Raylib.EndMode3D();
 
             rlImGui.Begin();
             ImGui.Begin("navigator 3000");
 
-            if (ImGui.Button("new bsp"))
-            {
-                depth = 0;
-                root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
-                tree = root;
-            }
-
             ImGui.Spacing();
+            ImGui.Text($"triangles {triangles.Count}");
             ImGui.Text($"depth {depth}");
 
-            if (tree.frontNode != null && !tree.frontNode.isLeaf)
+            if (tree.frontNode != null)
             {
                 if (ImGui.Button("go to front"))
                 {
                     tree = tree.frontNode;
                 }
             }
-            if (tree.backNode != null && !tree.backNode.isLeaf)
+            if (tree.backNode != null)
             {
                 if (ImGui.Button("go to back"))
                 {
                     tree = tree.backNode;
                 }
             }
+            if (tree.isLeaf)
+            {
+                ImGui.Text($"reached a leaf");
+                ImGui.Text($"half spaces {tree.leaf.halfSpaces.Count}");
+            }
             if (tree != root)
             {
+                ImGui.Spacing();
                 if (ImGui.Button("go back to root"))
                 {
                     tree = root;
@@ -190,13 +185,8 @@ class Program
             }
 
             ImGui.Spacing();
-            ImGui.Checkbox("sphere test", ref sphereTest);
-
-            if (sphereTest)
-            {
-                ImGui.SliderFloat("radius", ref sphereRadius, 0.1f, 2f);
-                ImGui.Text("use arrow keys to move around");
-            }
+            ImGui.SliderFloat3("point", ref point, -10, 10);
+            ImGui.Text($"point is in {pointState}");
 
             ImGui.End();
 

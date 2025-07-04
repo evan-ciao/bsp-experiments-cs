@@ -75,20 +75,18 @@ class BSPTraverse
     {
         debugNode = root;
 
+        float mind = radius;
+        BSPNode closestNode = null;
+
         while (debugNode != null && !debugNode.isLeaf)
         {
             float d = BSPTree.PlaneSignedDistance(position, debugNode.planeN, debugNode.planeD);
 
             // found a colliding node
-            if (d < radius && d >= 0)
+            if (MathF.Abs(d) < mind)
             {
-                // test
-                if (SphereIntersectsTriangles(position, radius, debugNode.coplanar))
-                {
-                    collisionN = debugNode.planeN;
-                    penetration = MathF.Abs(radius - d);
-                    return true;
-                }
+                mind = d;
+                closestNode = debugNode;
             }
 
             // otherwise
@@ -105,7 +103,33 @@ class BSPTraverse
 
         }
 
+        // test collision
+        if (closestNode != null && SphereIntersectsTriangles(position, radius, closestNode.coplanar))
+        {
+            collisionN = closestNode.planeN;
+            penetration = MathF.Abs(radius - mind);
+            return true;
+        }
+
         // no collision
         return false;
     }
+    /*
+    public static BSPNodeState TraversePoint(BSPNode root, Vector3 point)
+    {
+        BSPNode node = root;
+
+        while (!node.isLeaf)
+        {
+            float d = BSPTree.PlaneSignedDistance(point, node.planeN, node.planeD);
+
+            if (d >= 0)
+                node = node.frontNode;
+            else
+                node = node.backNode;
+        }
+
+        return node.state;
+    }
+    */
 }
