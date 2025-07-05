@@ -126,15 +126,6 @@ class BSPTree
     {
         var node = new BSPNode();
 
-        if (triangles.Count == 0) return node;
-        /*
-        if (triangles.Count == 1)
-        {
-            node.coplanar.Add(triangles[0]);
-            node.planeN = triangles[0].normal;
-            return node;
-        }*/
-
         int pivotIndex = rnd.Next(triangles.Count);
         var pivotTri = triangles[pivotIndex];
 
@@ -156,165 +147,39 @@ class BSPTree
 
         depth++;
 
-        node.frontNode = BuildBSP(node.front, ref depth, ref rnd);
-        node.backNode = BuildBSP(node.back, ref depth, ref rnd);
+        if (node.front.Count < 1) // air
+            node.frontNode = BuildBSPLeaf(BSPLeafState.AIR);
+        else
+            node.frontNode = BuildBSP(node.front, ref depth, ref rnd);
+
+        if (node.back.Count < 1) // solid
+            node.backNode = BuildBSPLeaf(BSPLeafState.SOLID);
+        else
+            node.backNode = BuildBSP(node.back, ref depth, ref rnd);
+
         return node;
     }
 
-    /// <summary>
-    /// Gathers all the triangles in a BSPNode and finds the smallest enclosing AABB.
-    /// </summary>
-    /// <param name="node">Target node.</param>
-    /// <returns>The vertices of the AABB.</returns>
-    private static List<Vector3> GetAABBFromBSPNode(BSPNode node)
+    private static BSPNode BuildBSPLeaf(BSPLeafState state)
     {
-        List<Vector3> aabb = new List<Vector3>(8);
-        List<Triangle> triangles = [.. node.front.Concat(node.back).Concat(node.coplanar)];
-        List<Vector3> soup = new();
+        var leaf = new BSPNode();
+        leaf.state = state;
 
-        foreach (var triangle in triangles)
-        {
-            soup.Add(triangle.v1);
-            soup.Add(triangle.v2);
-            soup.Add(triangle.v3);
-        }
-
-        if (soup.Count < 1)
-            return aabb;
-
-        Vector3 min = Vector3.Zero;
-        Vector3 max = Vector3.Zero;
-        foreach (var vertex in soup)
-        {
-            if (vertex.X < min.X)
-                min.X = vertex.X;
-            if (vertex.Y < min.Y)
-                min.Y = vertex.Y;
-            if (vertex.Z < min.Z)
-                min.Z = vertex.Z;
-
-            if (vertex.X > max.X)
-                max.X = vertex.X;
-            if (vertex.Y > max.Y)
-                max.Y = vertex.Y;
-            if (vertex.Z > max.Z)
-                max.Z = vertex.Z;
-        }
-
-        // lower
-        aabb.Add(min);
-        aabb.Add(new Vector3(max.X, min.Y, min.Z));
-        aabb.Add(new Vector3(max.X, min.Y, max.Z));
-        aabb.Add(new Vector3(min.X, min.Y, max.Z));
-        // upper
-        aabb.Add(new Vector3(min.X, max.Y, min.Z));
-        aabb.Add(new Vector3(max.X, max.Y, min.Z));
-        aabb.Add(max);
-        aabb.Add(new Vector3(min.X, max.Y, max.Z));
-
-        return aabb;
-    }
-
-    public static void BuildBSPLeaves(ref BSPNode root)
-    {
-        // cache aabb from root
-        List<Vector3> boundingAABB = GetAABBFromBSPNode(root);
-
-        List<HalfSpace> recursiveHalfSpaces = new();
-        PreOrderTraversal(ref root, recursiveHalfSpaces, boundingAABB);
-    }
-
-    /// <summary>
-    /// Recursively clips the bounding AABB with the leaf's half-spaces, then calculates the centroid.
-    /// </summary>
-    /// <param name="leaf">The target leaf.</param>
-    /// <param name="boundingAABB">The tree bounding AABB. This value is cloned before clipping.</param>
-    /// <returns>The centroid.</returns>
-    private static Vector3 GetBSPLeafCentroid(BSPLeaf leaf, List<Vector3> boundingAABB)
-    {
-        Vector3 centroid = Vector3.Zero;
-
-        if (leaf.halfSpaces == null)
-            return centroid;
-
-        List<Vector3> aabb = [.. boundingAABB]; // copy this crap
-
-        // ok so now we should just be able to slice through the aabb like a cake and pray ir works
-        foreach (var halfSpace in leaf.halfSpaces)
-        {
-            aabb = ClipPolygon(aabb, halfSpace.planeN, halfSpace.planeD, halfSpace.keepFront);
-        }
-
-        // sum and average
-        foreach (var vertex in aabb)
-            centroid += vertex;
-        centroid /= aabb.Count;
-
-        return centroid;
-    }
-
-    /// <summary>
-    /// Recursive function call. Traverses the tree from node until a leaf is found. The next branch is informed with the last iteration data.
-    /// </summary>
-    /// <param name="node">Recursive call on next binary nodes in the chain.</param>
-    /// <param name="branchHalfSpaces">Half-spaces that led up to this node.</param>
-    /// <param name="boundingAABB">Bounding AABB volume used by leaves for centroid calculation.</param>
-
-    private static void PreOrderTraversal(ref BSPNode node, List<HalfSpace> branchHalfSpaces, List<Vector3> boundingAABB)
-    {
-        if (node == null)
-            return;
-
-        if (node.isLeaf)
-        {
-            node.leaf = new();
-            node.leaf.halfSpaces = branchHalfSpaces;
-            node.leaf.centroid = GetBSPLeafCentroid(node.leaf, boundingAABB);
-
-            if (node.leaf.centroid != Vector3.NaN)
-                Program.centroids.Add(node.leaf.centroid);
-
-            Console.WriteLine($"[PreOrderTraversal] Reached a leaf with {branchHalfSpaces.Count} half spaces. Centroid {node.leaf.centroid}");
-            return;
-        }
-
-        var frontHalfSpace = new HalfSpace { planeN = node.planeN, planeD = node.planeD, keepFront = true };
-        var backHalfSpace = new HalfSpace { planeN = node.planeN, planeD = node.planeD, keepFront = false };
-
-        // lists are passed by reference ffs
-        if (node.frontNode != null)
-            PreOrderTraversal(ref node.frontNode, new List<HalfSpace>(branchHalfSpaces) { frontHalfSpace }, boundingAABB);// continue down this branch keeping the front of the plane
-        if (node.backNode != null)
-            PreOrderTraversal(ref node.backNode, new List<HalfSpace>(branchHalfSpaces) { backHalfSpace }, boundingAABB);  // keep the back of the plane
+        return leaf;
     }
 }
 
-enum BSPNodeState
+enum BSPLeafState
 {
     UNASSIGNED,
     AIR,
     SOLID
 }
 
-struct HalfSpace
-{
-    public Vector3 planeN;
-    public float planeD;
-    public bool keepFront;
-}
-
-class BSPLeaf
-{
-    public List<HalfSpace>? halfSpaces;
-    // defining a centroid within all of the half spaces?
-    public Vector3 centroid = Vector3.Zero;
-    public BSPNodeState state = BSPNodeState.UNASSIGNED;
-}
-
 class BSPNode
 {
+    public BSPLeafState state = BSPLeafState.UNASSIGNED;
     public bool isLeaf { get { return frontNode == null && backNode == null; } }
-    public BSPLeaf? leaf = null;
 
     public Vector3 planeN;
     public float planeD;

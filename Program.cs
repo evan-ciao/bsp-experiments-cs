@@ -13,9 +13,6 @@ struct Triangle
 
 class Program
 {
-    // lazy
-    public static List<Vector3> centroids = new();
-
     public static void Main()
     {
         Raylib.InitWindow(1280, 720, "BSP baking");
@@ -73,13 +70,11 @@ class Program
         Random rnd = new();
 
         BSPNode root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
-        BSPTree.BuildBSPLeaves(ref root);
-
         BSPNode tree = root;
 
         // point test traversal
         Vector3 point = Vector3.Zero;
-        BSPNodeState pointState = BSPNodeState.UNASSIGNED;
+        BSPLeafState pointState = BSPLeafState.UNASSIGNED;
 
         while (!Raylib.WindowShouldClose())
         {
@@ -89,7 +84,7 @@ class Program
                 Raylib.UpdateCamera(ref camera, CameraMode.Free);
 
             // traverse point
-            //pointState = BSPTraverse.TraversePoint(root, point);
+            pointState = BSPTraverse.TraversePoint(root, point);
             if (Raylib.IsKeyDown(KeyboardKey.Up))
                 point.Z -= 2 * delta;
             if (Raylib.IsKeyDown(KeyboardKey.Down))
@@ -134,18 +129,7 @@ class Program
                 );
             }
 
-            Raylib.DrawSphere(point, 0.05f, pointState == BSPNodeState.SOLID ? Color.Red : Color.Green);
-
-            // try drawing centroids
-            foreach (var centroid in centroids)
-            {
-                Raylib.DrawSphere(centroid, 0.05f, Color.Blue);
-            }
-            // aaaaa
-            if (tree.isLeaf)
-            {
-                Raylib.DrawSphere(tree.leaf.centroid, 0.08f, Color.DarkPurple);
-            }
+            Raylib.DrawSphere(point, 0.05f, pointState == BSPLeafState.SOLID ? Color.Red : Color.Green);
 
             Raylib.EndMode3D();
 
@@ -173,7 +157,7 @@ class Program
             if (tree.isLeaf)
             {
                 ImGui.Text($"reached a leaf");
-                ImGui.Text($"half spaces {tree.leaf.halfSpaces.Count}");
+                ImGui.Text($"state {tree.state}");
             }
             if (tree != root)
             {

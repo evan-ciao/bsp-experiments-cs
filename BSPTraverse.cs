@@ -114,8 +114,8 @@ class BSPTraverse
         // no collision
         return false;
     }
-    /*
-    public static BSPNodeState TraversePoint(BSPNode root, Vector3 point)
+    
+    public static BSPLeafState TraversePoint(BSPNode root, Vector3 point)
     {
         BSPNode node = root;
 
@@ -131,5 +131,4 @@ class BSPTraverse
 
         return node.state;
     }
-    */
 }
