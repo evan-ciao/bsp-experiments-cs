@@ -9,14 +9,16 @@ enum VertexClassification
     ON = 0,
 }
 
-class BSPTree
+public class BSPTree
 {
-    static public float PlaneSignedDistance(Vector3 p, Vector3 n, float d)
+    public static Random rnd = new Random();
+
+    public static float PlaneSignedDistance(Vector3 p, Vector3 n, float d)
     {
         return Vector3.Dot(n, p) + d;
     }
 
-    static private int ClassifyVertex(Vector3 p, Vector3 n, float d, float eps = 1e-6f)
+    private static int ClassifyVertex(Vector3 p, Vector3 n, float d, float eps = 1e-6f)
     {
         float dist = PlaneSignedDistance(p, n, d);
 
@@ -27,7 +29,7 @@ class BSPTree
         return (int)VertexClassification.ON;
     }
 
-    static private List<Vector3> ClipPolygon(List<Vector3> poly, Vector3 n, float d, bool keepFront)
+    private static List<Vector3> ClipPolygon(List<Vector3> poly, Vector3 n, float d, bool keepFront)
     {
         var outPoly = new List<Vector3>();
         int count = poly.Count;
@@ -122,9 +124,10 @@ class BSPTree
             outBack.Add(bt);
     }
 
-    public static BSPNode BuildBSP(List<Triangle> triangles, ref int depth, ref Random rnd)
+    public static BSPNode BuildBSP(List<Triangle> triangles, ref int nodes, ref int leaves)
     {
         var node = new BSPNode();
+        nodes++;
 
         int pivotIndex = rnd.Next(triangles.Count);
         var pivotTri = triangles[pivotIndex];
@@ -145,39 +148,50 @@ class BSPTree
             );
         }
 
-        depth++;
-
         if (node.front.Count < 1) // air
-            node.frontNode = BuildBSPLeaf(BSPLeafState.AIR);
+            node.frontNode = BuildBSPLeaf(BSPLeafState.AIR, ref leaves);
         else
-            node.frontNode = BuildBSP(node.front, ref depth, ref rnd);
+            node.frontNode = BuildBSP(node.front, ref nodes, ref leaves);
 
         if (node.back.Count < 1) // solid
-            node.backNode = BuildBSPLeaf(BSPLeafState.SOLID);
+            node.backNode = BuildBSPLeaf(BSPLeafState.SOLID, ref leaves);
         else
-            node.backNode = BuildBSP(node.back, ref depth, ref rnd);
+            node.backNode = BuildBSP(node.back, ref nodes, ref leaves);
 
         return node;
     }
 
-    private static BSPNode BuildBSPLeaf(BSPLeafState state)
+    private static BSPNode BuildBSPLeaf(BSPLeafState state, ref int leaves)
     {
         var leaf = new BSPNode();
+        leaves++;
+
         leaf.state = state;
 
         return leaf;
     }
 }
 
-enum BSPLeafState
+public enum BSPLeafState
 {
     UNASSIGNED,
     AIR,
     SOLID
 }
 
-class BSPNode
+public class BSPNode
 {
+    #region ID for exporting
+    protected string _nodeID = "";
+    public string nodeID { get { return _nodeID; } }
+    public BSPNode()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        _nodeID = new string(Enumerable.Repeat(chars, 8)
+            .Select(s => s[BSPTree.rnd.Next(s.Length)]).ToArray());
+    }
+    #endregion
+
     public BSPLeafState state = BSPLeafState.UNASSIGNED;
     public bool isLeaf { get { return frontNode == null && backNode == null; } }
 

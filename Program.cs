@@ -4,8 +4,9 @@ using Raylib_cs;
 using BSP;
 using rlImGui_cs;
 using ImGuiNET;
+using HeaderExporter;
 
-struct Triangle
+public struct Triangle
 {
     public Vector3 v1, v2, v3;
     public Vector3 normal;
@@ -66,11 +67,13 @@ class Program
         rlImGui.Setup(true);
 
         // bsp
-        int depth = 0;
-        Random rnd = new();
+        int nodes = 0;
+        int leaves = 0;
 
-        BSPNode root = BSPTree.BuildBSP(triangles, ref depth, ref rnd);
+        BSPNode root = BSPTree.BuildBSP(triangles, ref nodes, ref leaves);
         BSPNode tree = root;
+
+        HPPExporter.TestExport(root);
 
         // point test traversal
         Vector3 point = Vector3.Zero;
@@ -138,7 +141,7 @@ class Program
 
             ImGui.Spacing();
             ImGui.Text($"triangles {triangles.Count}");
-            ImGui.Text($"depth {depth}");
+            ImGui.Text($"nodes {nodes} leaves {leaves}");
 
             if (tree.frontNode != null)
             {
@@ -158,6 +161,7 @@ class Program
             {
                 ImGui.Text($"reached a leaf");
                 ImGui.Text($"state {tree.state}");
+                ImGui.Text($"leaf id {tree.nodeID}");
             }
             if (tree != root)
             {
