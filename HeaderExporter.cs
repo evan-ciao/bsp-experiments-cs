@@ -42,7 +42,8 @@ public static class HPPExporter
             return;
 
         // visit the current node
-        declaration.Append($"BSPNode* {node.nodeID} = &BSPNode();");
+        declaration.Append($"BSPNode* {node.nodeID};\n");
+        declaration.Append($"{node.nodeID} = new BSPNode();");
         if (node.isLeaf)
         {
             declaration.Append(" // leaf");

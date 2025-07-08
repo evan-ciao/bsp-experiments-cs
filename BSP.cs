@@ -191,6 +191,10 @@ public class BSPNode
             .Select(s => s[BSPTree.rnd.Next(s.Length)]).ToArray());
     }
     #endregion
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 
     public BSPLeafState state = BSPLeafState.UNASSIGNED;
     public bool isLeaf { get { return frontNode == null && backNode == null; } }

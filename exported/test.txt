@@ -11,341 +11,364 @@ BSPNode* root = nullptr;
 
 cmap_Test()
 {
-BSPNode* hTRfaRFl = &BSPNode();
-BSPNode* amaVYDpN = &BSPNode();
-BSPNode* FCLBDVld = &BSPNode();
-BSPNode* lbqSnjgr = &BSPNode(); // leaf
-BSPNode* KStwMtuZ = &BSPNode(); // leaf
-BSPNode* lFaIeFIU = &BSPNode();
-BSPNode* GIeXXoAb = &BSPNode();
-BSPNode* AkGaoviI = &BSPNode(); // leaf
-BSPNode* vzgUdPlY = &BSPNode(); // leaf
-BSPNode* ByGkruEJ = &BSPNode();
-BSPNode* fLtbjUWK = &BSPNode();
-BSPNode* kobWcEKN = &BSPNode(); // leaf
-BSPNode* vftMwQcb = &BSPNode(); // leaf
-BSPNode* UpirSfCf = &BSPNode();
-BSPNode* lmOHSrGG = &BSPNode();
-BSPNode* xkOhTFOT = &BSPNode(); // leaf
-BSPNode* vyXMBrzT = &BSPNode(); // leaf
-BSPNode* avzeyVcl = &BSPNode(); // leaf
-BSPNode* TfflFcKf = &BSPNode();
-BSPNode* HwHRUzfP = &BSPNode();
-BSPNode* EQOMZFvC = &BSPNode();
-BSPNode* jyBmBGSz = &BSPNode();
-BSPNode* eZvqXjVH = &BSPNode();
-BSPNode* TUqThAWZ = &BSPNode();
-BSPNode* OEIMOgou = &BSPNode(); // leaf
-BSPNode* UdLhxihe = &BSPNode();
-BSPNode* wrKdXDrp = &BSPNode(); // leaf
-BSPNode* DrzugSXc = &BSPNode();
-BSPNode* ZoyWCWlB = &BSPNode(); // leaf
-BSPNode* FZhZZFYi = &BSPNode(); // leaf
-BSPNode* evCmYaZH = &BSPNode();
-BSPNode* ElasrkYJ = &BSPNode(); // leaf
-BSPNode* VqyevOyU = &BSPNode();
-BSPNode* vgrLPMwT = &BSPNode(); // leaf
-BSPNode* atLSSSmT = &BSPNode();
-BSPNode* SPfIzYHT = &BSPNode(); // leaf
-BSPNode* KzTCmIKh = &BSPNode();
-BSPNode* CLWJdsiW = &BSPNode(); // leaf
-BSPNode* gnrkEEJR = &BSPNode();
-BSPNode* kmPylIFr = &BSPNode(); // leaf
-BSPNode* zrYWjrIt = &BSPNode();
-BSPNode* xcYqBXZW = &BSPNode(); // leaf
-BSPNode* eDUNlNet = &BSPNode(); // leaf
-BSPNode* CYdMDutr = &BSPNode();
-BSPNode* ULzZTWMW = &BSPNode(); // leaf
-BSPNode* HXkhHYOi = &BSPNode();
-BSPNode* MbUAYXQG = &BSPNode(); // leaf
-BSPNode* mjgvqcKA = &BSPNode();
-BSPNode* YdpwrPAh = &BSPNode(); // leaf
-BSPNode* yLbduzmJ = &BSPNode(); // leaf
-BSPNode* BZOnzmJA = &BSPNode();
-BSPNode* jRiYeRlI = &BSPNode(); // leaf
-BSPNode* wjaZCkva = &BSPNode();
-BSPNode* jdkEjhPL = &BSPNode(); // leaf
-BSPNode* HayKcJRk = &BSPNode();
-BSPNode* BHGghJTV = &BSPNode(); // leaf
-BSPNode* GnFmKXFp = &BSPNode();
-BSPNode* jCOSeiDG = &BSPNode(); // leaf
-BSPNode* cWvTBINL = &BSPNode();
-BSPNode* UIjKzXaE = &BSPNode(); // leaf
-BSPNode* hAwMWNhs = &BSPNode(); // leaf
-BSPNode* fgCghXIu = &BSPNode();
-BSPNode* ptMcwfVs = &BSPNode();
-BSPNode* tTcyosNG = &BSPNode(); // leaf
-BSPNode* qggWMWbF = &BSPNode(); // leaf
-BSPNode* ISuvplRt = &BSPNode();
-BSPNode* XEfiMkqj = &BSPNode();
-BSPNode* tZzunXmo = &BSPNode(); // leaf
-BSPNode* uNsivMBB = &BSPNode(); // leaf
-BSPNode* RdeAktHx = &BSPNode();
-BSPNode* kBOMIlNG = &BSPNode();
-BSPNode* lAJMtYll = &BSPNode(); // leaf
-BSPNode* EIxFsBKj = &BSPNode(); // leaf
-BSPNode* VSniNLQd = &BSPNode();
-BSPNode* kVoszUKe = &BSPNode();
-BSPNode* xgomZHpo = &BSPNode(); // leaf
-BSPNode* MNtNYUaO = &BSPNode();
-BSPNode* lFNtQiyW = &BSPNode(); // leaf
-BSPNode* SvUiVLBs = &BSPNode();
-BSPNode* aYgbnqnp = &BSPNode(); // leaf
-BSPNode* iryeZOeD = &BSPNode(); // leaf
-BSPNode* nDQAaTsp = &BSPNode(); // leaf
-BSPNode* fhwnCeQc = &BSPNode();
-BSPNode* xqAUWbBn = &BSPNode(); // leaf
-BSPNode* rOlVKpfW = &BSPNode();
-BSPNode* FrneQldA = &BSPNode();
-BSPNode* EbqEtSwB = &BSPNode(); // leaf
-BSPNode* ZeVUWNGN = &BSPNode(); // leaf
-BSPNode* cbTmHwuJ = &BSPNode();
-BSPNode* BEehbIdj = &BSPNode();
-BSPNode* FqNimhhP = &BSPNode(); // leaf
-BSPNode* VyhbyZrk = &BSPNode();
-BSPNode* vsqijwGg = &BSPNode(); // leaf
-BSPNode* lpRBVPhi = &BSPNode(); // leaf
-BSPNode* HqZPkKkC = &BSPNode(); // leaf
+BSPNode* KitZUmrQ;
+KitZUmrQ = new BSPNode();
+BSPNode* VDOnChqL;
+VDOnChqL = new BSPNode();
+BSPNode* btzrfZla;
+btzrfZla = new BSPNode(); // leaf
+BSPNode* JdCOqDPF;
+JdCOqDPF = new BSPNode(); // leaf
+BSPNode* UdZcXJIr;
+UdZcXJIr = new BSPNode();
+BSPNode* GjKXrECu;
+GjKXrECu = new BSPNode();
+BSPNode* zHEbOTHY;
+zHEbOTHY = new BSPNode();
+BSPNode* GjdgrnXw;
+GjdgrnXw = new BSPNode(); // leaf
+BSPNode* yMJOXNon;
+yMJOXNon = new BSPNode(); // leaf
+BSPNode* eLmjPDKS;
+eLmjPDKS = new BSPNode();
+BSPNode* zWYoeHiO;
+zWYoeHiO = new BSPNode();
+BSPNode* SuKwKaWR;
+SuKwKaWR = new BSPNode(); // leaf
+BSPNode* OjCohhJI;
+OjCohhJI = new BSPNode(); // leaf
+BSPNode* xSMIeFry;
+xSMIeFry = new BSPNode();
+BSPNode* FXChReGz;
+FXChReGz = new BSPNode();
+BSPNode* HSftvEbR;
+HSftvEbR = new BSPNode(); // leaf
+BSPNode* tOyMRejR;
+tOyMRejR = new BSPNode();
+BSPNode* WTgNAita;
+WTgNAita = new BSPNode(); // leaf
+BSPNode* xiGNWdDS;
+xiGNWdDS = new BSPNode();
+BSPNode* aIeqfnEh;
+aIeqfnEh = new BSPNode(); // leaf
+BSPNode* ZNkXVgTZ;
+ZNkXVgTZ = new BSPNode(); // leaf
+BSPNode* PJPDkTTt;
+PJPDkTTt = new BSPNode(); // leaf
+BSPNode* bbjDDbBV;
+bbjDDbBV = new BSPNode();
+BSPNode* VLdiOknS;
+VLdiOknS = new BSPNode();
+BSPNode* wDMJbjwv;
+wDMJbjwv = new BSPNode();
+BSPNode* cKRWrOpH;
+cKRWrOpH = new BSPNode(); // leaf
+BSPNode* kdnDsgKf;
+kdnDsgKf = new BSPNode(); // leaf
+BSPNode* CHIJXXeJ;
+CHIJXXeJ = new BSPNode();
+BSPNode* hjyFXVAZ;
+hjyFXVAZ = new BSPNode(); // leaf
+BSPNode* Qhflizzf;
+Qhflizzf = new BSPNode();
+BSPNode* GdPIDTRR;
+GdPIDTRR = new BSPNode();
+BSPNode* ZStZYCJt;
+ZStZYCJt = new BSPNode(); // leaf
+BSPNode* moodVrFk;
+moodVrFk = new BSPNode(); // leaf
+BSPNode* OhkfOxfv;
+OhkfOxfv = new BSPNode(); // leaf
+BSPNode* FcsQNfdM;
+FcsQNfdM = new BSPNode();
+BSPNode* hdfcuNsH;
+hdfcuNsH = new BSPNode();
+BSPNode* PmhpAFUy;
+PmhpAFUy = new BSPNode(); // leaf
+BSPNode* PUxBztME;
+PUxBztME = new BSPNode(); // leaf
+BSPNode* FKUqftZe;
+FKUqftZe = new BSPNode();
+BSPNode* XXsHuRRd;
+XXsHuRRd = new BSPNode();
+BSPNode* TkmggGQr;
+TkmggGQr = new BSPNode(); // leaf
+BSPNode* IDQIeeTs;
+IDQIeeTs = new BSPNode(); // leaf
+BSPNode* JsTzGSPM;
+JsTzGSPM = new BSPNode();
+BSPNode* GxeXorCK;
+GxeXorCK = new BSPNode();
+BSPNode* PWCwitSS;
+PWCwitSS = new BSPNode();
+BSPNode* FdHDIXUS;
+FdHDIXUS = new BSPNode(); // leaf
+BSPNode* rsCbRoac;
+rsCbRoac = new BSPNode();
+BSPNode* qCFjaxIQ;
+qCFjaxIQ = new BSPNode(); // leaf
+BSPNode* TjLbMacG;
+TjLbMacG = new BSPNode();
+BSPNode* YeNIZTpr;
+YeNIZTpr = new BSPNode(); // leaf
+BSPNode* asmqZelT;
+asmqZelT = new BSPNode();
+BSPNode* XwmrnMSr;
+XwmrnMSr = new BSPNode();
+BSPNode* GXxcAbwa;
+GXxcAbwa = new BSPNode(); // leaf
+BSPNode* DWMyqofi;
+DWMyqofi = new BSPNode(); // leaf
+BSPNode* APHoCejN;
+APHoCejN = new BSPNode();
+BSPNode* eIkEawGE;
+eIkEawGE = new BSPNode(); // leaf
+BSPNode* LJachsSJ;
+LJachsSJ = new BSPNode(); // leaf
+BSPNode* WMrwCdXf;
+WMrwCdXf = new BSPNode();
+BSPNode* xFuzJNCn;
+xFuzJNCn = new BSPNode(); // leaf
+BSPNode* dbvaYXwN;
+dbvaYXwN = new BSPNode();
+BSPNode* IptsTrlf;
+IptsTrlf = new BSPNode();
+BSPNode* uLrNkhsy;
+uLrNkhsy = new BSPNode(); // leaf
+BSPNode* TuIQspHJ;
+TuIQspHJ = new BSPNode();
+BSPNode* gJtllHIU;
+gJtllHIU = new BSPNode(); // leaf
+BSPNode* teVlabUK;
+teVlabUK = new BSPNode(); // leaf
+BSPNode* OheVvCGy;
+OheVvCGy = new BSPNode();
+BSPNode* IYmykvlI;
+IYmykvlI = new BSPNode();
+BSPNode* rINfLNjV;
+rINfLNjV = new BSPNode(); // leaf
+BSPNode* levtYjTk;
+levtYjTk = new BSPNode();
+BSPNode* KwvDycZo;
+KwvDycZo = new BSPNode(); // leaf
+BSPNode* XflXAGtp;
+XflXAGtp = new BSPNode();
+BSPNode* mycqkJmI;
+mycqkJmI = new BSPNode(); // leaf
+BSPNode* PInkzqce;
+PInkzqce = new BSPNode();
+BSPNode* GRsPQTlN;
+GRsPQTlN = new BSPNode(); // leaf
+BSPNode* jjBdnAko;
+jjBdnAko = new BSPNode(); // leaf
+BSPNode* sGVHBGZp;
+sGVHBGZp = new BSPNode();
+BSPNode* NNpnDQMi;
+NNpnDQMi = new BSPNode(); // leaf
+BSPNode* hncUpqap;
+hncUpqap = new BSPNode(); // leaf
+BSPNode* vITIZYOM;
+vITIZYOM = new BSPNode(); // leaf
 
-hTRfaRFl->planeN = vector3(3579, 0, -1991);
-hTRfaRFl->planeD = -20415;
-amaVYDpN->planeN = vector3(4096, 0, 0);
-amaVYDpN->planeD = -15564;
-FCLBDVld->planeN = vector3(0, 4096, 0);
-FCLBDVld->planeD = 0;
-lbqSnjgr->state = AIR;
-KStwMtuZ->state = SOLID;
-lFaIeFIU->planeN = vector3(0, 0, 4096);
-lFaIeFIU->planeD = 16384;
-GIeXXoAb->planeN = vector3(0, 4096, 0);
-GIeXXoAb->planeD = 0;
-AkGaoviI->state = AIR;
-vzgUdPlY->state = SOLID;
-ByGkruEJ->planeN = vector3(0, 0, -4096);
-ByGkruEJ->planeD = -24576;
-fLtbjUWK->planeN = vector3(0, 4096, 0);
-fLtbjUWK->planeD = 0;
-kobWcEKN->state = AIR;
-vftMwQcb->state = SOLID;
-UpirSfCf->planeN = vector3(0, 4096, 0);
-UpirSfCf->planeD = 0;
-lmOHSrGG->planeN = vector3(0, 4096, 0);
-lmOHSrGG->planeD = -8192;
-xkOhTFOT->state = AIR;
-vyXMBrzT->state = SOLID;
-avzeyVcl->state = SOLID;
-TfflFcKf->planeN = vector3(0, 0, -4096);
-TfflFcKf->planeD = 18022;
-HwHRUzfP->planeN = vector3(3712, 0, -1731);
-HwHRUzfP->planeD = 10080;
-EQOMZFvC->planeN = vector3(0, 4096, 0);
-EQOMZFvC->planeD = 0;
-jyBmBGSz->planeN = vector3(0, 0, 4096);
-jyBmBGSz->planeD = 16384;
-eZvqXjVH->planeN = vector3(-3390, 1994, 1142);
-eZvqXjVH->planeD = 12441;
-TUqThAWZ->planeN = vector3(1505, 2019, 3229);
-TUqThAWZ->planeD = 12526;
-OEIMOgou->state = AIR;
-UdLhxihe->planeN = vector3(1973, 2496, 2578);
-UdLhxihe->planeD = 12867;
-wrKdXDrp->state = AIR;
-DrzugSXc->planeN = vector3(3712, 0, -1731);
-DrzugSXc->planeD = 10080;
-ZoyWCWlB->state = AIR;
-FZhZZFYi->state = SOLID;
-evCmYaZH->planeN = vector3(-920, 3806, 1200);
-evCmYaZH->planeD = -4921;
-ElasrkYJ->state = AIR;
-VqyevOyU->planeN = vector3(-3421, 1204, 1903);
-VqyevOyU->planeD = 10843;
-vgrLPMwT->state = AIR;
-atLSSSmT->planeN = vector3(-1991, 0, -3579);
-atLSSSmT->planeD = 16279;
-SPfIzYHT->state = AIR;
-KzTCmIKh->planeN = vector3(2007, 0, 3570);
-KzTCmIKh->planeD = -25602;
-CLWJdsiW->state = AIR;
-gnrkEEJR->planeN = vector3(1991, -20, 3579);
-gnrkEEJR->planeD = -25512;
-kmPylIFr->state = AIR;
-zrYWjrIt->planeN = vector3(0, 4096, 0);
-zrYWjrIt->planeD = -8711;
-xcYqBXZW->state = AIR;
-eDUNlNet->state = SOLID;
-CYdMDutr->planeN = vector3(0, 0, -4096);
-CYdMDutr->planeD = -24576;
-ULzZTWMW->state = AIR;
-HXkhHYOi->planeN = vector3(-4096, 0, 0);
-HXkhHYOi->planeD = 7372;
-MbUAYXQG->state = AIR;
-mjgvqcKA->planeN = vector3(0, 4096, 0);
-mjgvqcKA->planeD = -8192;
-YdpwrPAh->state = AIR;
-yLbduzmJ->state = SOLID;
-BZOnzmJA->planeN = vector3(-1991, 0, -3579);
-BZOnzmJA->planeD = 16279;
-jRiYeRlI->state = AIR;
-wjaZCkva->planeN = vector3(1991, -20, 3579);
-wjaZCkva->planeD = -25512;
-jdkEjhPL->state = AIR;
-HayKcJRk->planeN = vector3(-3421, 1204, 1903);
-HayKcJRk->planeD = 10843;
-BHGghJTV->state = AIR;
-GnFmKXFp->planeN = vector3(-3390, 1994, 1142);
-GnFmKXFp->planeD = 12441;
-jCOSeiDG->state = AIR;
-cWvTBINL->planeN = vector3(2007, 0, 3570);
-cWvTBINL->planeD = -25602;
-UIjKzXaE->state = AIR;
-hAwMWNhs->state = SOLID;
-fgCghXIu->planeN = vector3(1973, 2496, 2578);
-fgCghXIu->planeD = 12867;
-ptMcwfVs->planeN = vector3(0, 4096, 0);
-ptMcwfVs->planeD = 0;
-tTcyosNG->state = AIR;
-qggWMWbF->state = SOLID;
-ISuvplRt->planeN = vector3(-1731, 0, -3712);
-ISuvplRt->planeD = -22590;
-XEfiMkqj->planeN = vector3(0, 4096, 0);
-XEfiMkqj->planeD = 0;
-tZzunXmo->state = AIR;
-uNsivMBB->state = SOLID;
-RdeAktHx->planeN = vector3(1505, 2019, 3229);
-RdeAktHx->planeD = 12526;
-kBOMIlNG->planeN = vector3(0, 4096, 0);
-kBOMIlNG->planeD = 0;
-lAJMtYll->state = AIR;
-EIxFsBKj->state = SOLID;
-VSniNLQd->planeN = vector3(0, 4096, 0);
-VSniNLQd->planeD = 0;
-kVoszUKe->planeN = vector3(-3712, 0, 1731);
-kVoszUKe->planeD = -18272;
-xgomZHpo->state = AIR;
-MNtNYUaO->planeN = vector3(0, 4096, 0);
-MNtNYUaO->planeD = -8192;
-lFNtQiyW->state = AIR;
-SvUiVLBs->planeN = vector3(-3712, 0, 1731);
-SvUiVLBs->planeD = -18272;
-aYgbnqnp->state = AIR;
-iryeZOeD->state = SOLID;
-nDQAaTsp->state = SOLID;
-fhwnCeQc->planeN = vector3(0, 4096, 0);
-fhwnCeQc->planeD = -8192;
-xqAUWbBn->state = AIR;
-rOlVKpfW->planeN = vector3(-4096, 0, 0);
-rOlVKpfW->planeD = -19251;
-FrneQldA->planeN = vector3(0, 4096, 0);
-FrneQldA->planeD = 0;
-EbqEtSwB->state = AIR;
-ZeVUWNGN->state = SOLID;
-cbTmHwuJ->planeN = vector3(0, 4096, 0);
-cbTmHwuJ->planeD = 0;
-BEehbIdj->planeN = vector3(4096, 0, 0);
-BEehbIdj->planeD = 11059;
-FqNimhhP->state = AIR;
-VyhbyZrk->planeN = vector3(0, 0, 4096);
-VyhbyZrk->planeD = -26214;
-vsqijwGg->state = AIR;
-lpRBVPhi->state = SOLID;
-HqZPkKkC->state = SOLID;
+KitZUmrQ->planeN = vector3(0, 0, -4096);
+KitZUmrQ->planeD = -12288;
+VDOnChqL->planeN = vector3(0, 4096, 0);
+VDOnChqL->planeD = 0;
+btzrfZla->state = AIR;
+JdCOqDPF->state = SOLID;
+UdZcXJIr->planeN = vector3(-3712, 0, 1731);
+UdZcXJIr->planeD = -9136;
+GjKXrECu->planeN = vector3(4096, 0, 0);
+GjKXrECu->planeD = 5529;
+zHEbOTHY->planeN = vector3(0, 4096, 0);
+zHEbOTHY->planeD = 0;
+GjdgrnXw->state = AIR;
+yMJOXNon->state = SOLID;
+eLmjPDKS->planeN = vector3(0, 0, 4096);
+eLmjPDKS->planeD = -13107;
+zWYoeHiO->planeN = vector3(0, 4096, 0);
+zWYoeHiO->planeD = 0;
+SuKwKaWR->state = AIR;
+OjCohhJI->state = SOLID;
+xSMIeFry->planeN = vector3(0, 4096, 0);
+xSMIeFry->planeD = 0;
+FXChReGz->planeN = vector3(0, 4096, 0);
+FXChReGz->planeD = -4096;
+HSftvEbR->state = AIR;
+tOyMRejR->planeN = vector3(0, 0, -4096);
+tOyMRejR->planeD = 9011;
+WTgNAita->state = AIR;
+xiGNWdDS->planeN = vector3(-4096, 0, 0);
+xiGNWdDS->planeD = -9625;
+aIeqfnEh->state = AIR;
+ZNkXVgTZ->state = SOLID;
+PJPDkTTt->state = SOLID;
+bbjDDbBV->planeN = vector3(3579, 0, -1991);
+bbjDDbBV->planeD = -10207;
+VLdiOknS->planeN = vector3(4096, 0, 0);
+VLdiOknS->planeD = -7782;
+wDMJbjwv->planeN = vector3(0, 4096, 0);
+wDMJbjwv->planeD = 0;
+cKRWrOpH->state = AIR;
+kdnDsgKf->state = SOLID;
+CHIJXXeJ->planeN = vector3(0, 4096, 0);
+CHIJXXeJ->planeD = -4096;
+hjyFXVAZ->state = AIR;
+Qhflizzf->planeN = vector3(0, 4096, 0);
+Qhflizzf->planeD = 0;
+GdPIDTRR->planeN = vector3(0, 0, 4096);
+GdPIDTRR->planeD = 8192;
+ZStZYCJt->state = AIR;
+moodVrFk->state = SOLID;
+OhkfOxfv->state = SOLID;
+FcsQNfdM->planeN = vector3(1991, -21, 3579);
+FcsQNfdM->planeD = -12754;
+hdfcuNsH->planeN = vector3(0, 4096, 0);
+hdfcuNsH->planeD = 0;
+PmhpAFUy->state = AIR;
+PUxBztME->state = SOLID;
+FKUqftZe->planeN = vector3(-1731, 0, -3712);
+FKUqftZe->planeD = -11295;
+XXsHuRRd->planeN = vector3(0, 4096, 0);
+XXsHuRRd->planeD = 0;
+TkmggGQr->state = AIR;
+IDQIeeTs->state = SOLID;
+JsTzGSPM->planeN = vector3(0, 4096, 0);
+JsTzGSPM->planeD = 0;
+GxeXorCK->planeN = vector3(-4096, 0, 0);
+GxeXorCK->planeD = 3686;
+PWCwitSS->planeN = vector3(4096, 0, 0);
+PWCwitSS->planeD = 5529;
+FdHDIXUS->state = AIR;
+rsCbRoac->planeN = vector3(3712, 0, -1731);
+rsCbRoac->planeD = 5040;
+qCFjaxIQ->state = AIR;
+TjLbMacG->planeN = vector3(0, 4096, 0);
+TjLbMacG->planeD = -4096;
+YeNIZTpr->state = AIR;
+asmqZelT->planeN = vector3(1973, 2496, 2578);
+asmqZelT->planeD = 6433;
+XwmrnMSr->planeN = vector3(0, 0, -4096);
+XwmrnMSr->planeD = 9011;
+GXxcAbwa->state = AIR;
+DWMyqofi->state = SOLID;
+APHoCejN->planeN = vector3(1505, 2019, 3229);
+APHoCejN->planeD = 6263;
+eIkEawGE->state = AIR;
+LJachsSJ->state = SOLID;
+WMrwCdXf->planeN = vector3(0, 4096, 0);
+WMrwCdXf->planeD = -4355;
+xFuzJNCn->state = AIR;
+dbvaYXwN->planeN = vector3(-3329, 2085, 1157);
+dbvaYXwN->planeD = 5949;
+IptsTrlf->planeN = vector3(0, 0, 4096);
+IptsTrlf->planeD = 8192;
+uLrNkhsy->state = AIR;
+TuIQspHJ->planeN = vector3(0, 4096, 0);
+TuIQspHJ->planeD = -4096;
+gJtllHIU->state = AIR;
+teVlabUK->state = SOLID;
+OheVvCGy->planeN = vector3(0, 0, 4096);
+OheVvCGy->planeD = 8192;
+IYmykvlI->planeN = vector3(-1991, 0, -3579);
+IYmykvlI->planeD = 8139;
+rINfLNjV->state = AIR;
+levtYjTk->planeN = vector3(-3395, 1297, 1888);
+levtYjTk->planeD = 5304;
+KwvDycZo->state = AIR;
+XflXAGtp->planeN = vector3(-920, 3806, 1200);
+XflXAGtp->planeD = -2460;
+mycqkJmI->state = AIR;
+PInkzqce->planeN = vector3(2007, 0, 3570);
+PInkzqce->planeD = -12801;
+GRsPQTlN->state = AIR;
+jjBdnAko->state = SOLID;
+sGVHBGZp->planeN = vector3(0, 4096, 0);
+sGVHBGZp->planeD = -4096;
+NNpnDQMi->state = AIR;
+hncUpqap->state = SOLID;
+vITIZYOM->state = SOLID;
 
-hTRfaRFl->frontNode = amaVYDpN;
-hTRfaRFl->backNode = TfflFcKf;
-amaVYDpN->frontNode = FCLBDVld;
-amaVYDpN->backNode = lFaIeFIU;
-FCLBDVld->frontNode = lbqSnjgr;
-FCLBDVld->backNode = KStwMtuZ;
-lFaIeFIU->frontNode = GIeXXoAb;
-lFaIeFIU->backNode = ByGkruEJ;
-GIeXXoAb->frontNode = AkGaoviI;
-GIeXXoAb->backNode = vzgUdPlY;
-ByGkruEJ->frontNode = fLtbjUWK;
-ByGkruEJ->backNode = UpirSfCf;
-fLtbjUWK->frontNode = kobWcEKN;
-fLtbjUWK->backNode = vftMwQcb;
-UpirSfCf->frontNode = lmOHSrGG;
-UpirSfCf->backNode = avzeyVcl;
-lmOHSrGG->frontNode = xkOhTFOT;
-lmOHSrGG->backNode = vyXMBrzT;
-TfflFcKf->frontNode = HwHRUzfP;
-TfflFcKf->backNode = fhwnCeQc;
-HwHRUzfP->frontNode = EQOMZFvC;
-HwHRUzfP->backNode = fgCghXIu;
-EQOMZFvC->frontNode = jyBmBGSz;
-EQOMZFvC->backNode = BZOnzmJA;
-jyBmBGSz->frontNode = eZvqXjVH;
-jyBmBGSz->backNode = CYdMDutr;
-eZvqXjVH->frontNode = TUqThAWZ;
-eZvqXjVH->backNode = evCmYaZH;
-TUqThAWZ->frontNode = OEIMOgou;
-TUqThAWZ->backNode = UdLhxihe;
-UdLhxihe->frontNode = wrKdXDrp;
-UdLhxihe->backNode = DrzugSXc;
-DrzugSXc->frontNode = ZoyWCWlB;
-DrzugSXc->backNode = FZhZZFYi;
-evCmYaZH->frontNode = ElasrkYJ;
-evCmYaZH->backNode = VqyevOyU;
-VqyevOyU->frontNode = vgrLPMwT;
-VqyevOyU->backNode = atLSSSmT;
-atLSSSmT->frontNode = SPfIzYHT;
-atLSSSmT->backNode = KzTCmIKh;
-KzTCmIKh->frontNode = CLWJdsiW;
-KzTCmIKh->backNode = gnrkEEJR;
-gnrkEEJR->frontNode = kmPylIFr;
-gnrkEEJR->backNode = zrYWjrIt;
-zrYWjrIt->frontNode = xcYqBXZW;
-zrYWjrIt->backNode = eDUNlNet;
-CYdMDutr->frontNode = ULzZTWMW;
-CYdMDutr->backNode = HXkhHYOi;
-HXkhHYOi->frontNode = MbUAYXQG;
-HXkhHYOi->backNode = mjgvqcKA;
-mjgvqcKA->frontNode = YdpwrPAh;
-mjgvqcKA->backNode = yLbduzmJ;
-BZOnzmJA->frontNode = jRiYeRlI;
-BZOnzmJA->backNode = wjaZCkva;
-wjaZCkva->frontNode = jdkEjhPL;
-wjaZCkva->backNode = HayKcJRk;
-HayKcJRk->frontNode = BHGghJTV;
-HayKcJRk->backNode = GnFmKXFp;
-GnFmKXFp->frontNode = jCOSeiDG;
-GnFmKXFp->backNode = cWvTBINL;
-cWvTBINL->frontNode = UIjKzXaE;
-cWvTBINL->backNode = hAwMWNhs;
-fgCghXIu->frontNode = ptMcwfVs;
-fgCghXIu->backNode = ISuvplRt;
-ptMcwfVs->frontNode = tTcyosNG;
-ptMcwfVs->backNode = qggWMWbF;
-ISuvplRt->frontNode = XEfiMkqj;
-ISuvplRt->backNode = RdeAktHx;
-XEfiMkqj->frontNode = tZzunXmo;
-XEfiMkqj->backNode = uNsivMBB;
-RdeAktHx->frontNode = kBOMIlNG;
-RdeAktHx->backNode = VSniNLQd;
-kBOMIlNG->frontNode = lAJMtYll;
-kBOMIlNG->backNode = EIxFsBKj;
-VSniNLQd->frontNode = kVoszUKe;
-VSniNLQd->backNode = nDQAaTsp;
-kVoszUKe->frontNode = xgomZHpo;
-kVoszUKe->backNode = MNtNYUaO;
-MNtNYUaO->frontNode = lFNtQiyW;
-MNtNYUaO->backNode = SvUiVLBs;
-SvUiVLBs->frontNode = aYgbnqnp;
-SvUiVLBs->backNode = iryeZOeD;
-fhwnCeQc->frontNode = xqAUWbBn;
-fhwnCeQc->backNode = rOlVKpfW;
-rOlVKpfW->frontNode = FrneQldA;
-rOlVKpfW->backNode = cbTmHwuJ;
-FrneQldA->frontNode = EbqEtSwB;
-FrneQldA->backNode = ZeVUWNGN;
-cbTmHwuJ->frontNode = BEehbIdj;
-cbTmHwuJ->backNode = HqZPkKkC;
-BEehbIdj->frontNode = FqNimhhP;
-BEehbIdj->backNode = VyhbyZrk;
-VyhbyZrk->frontNode = vsqijwGg;
-VyhbyZrk->backNode = lpRBVPhi;
+KitZUmrQ->frontNode = VDOnChqL;
+KitZUmrQ->backNode = UdZcXJIr;
+VDOnChqL->frontNode = btzrfZla;
+VDOnChqL->backNode = JdCOqDPF;
+UdZcXJIr->frontNode = GjKXrECu;
+UdZcXJIr->backNode = bbjDDbBV;
+GjKXrECu->frontNode = zHEbOTHY;
+GjKXrECu->backNode = eLmjPDKS;
+zHEbOTHY->frontNode = GjdgrnXw;
+zHEbOTHY->backNode = yMJOXNon;
+eLmjPDKS->frontNode = zWYoeHiO;
+eLmjPDKS->backNode = xSMIeFry;
+zWYoeHiO->frontNode = SuKwKaWR;
+zWYoeHiO->backNode = OjCohhJI;
+xSMIeFry->frontNode = FXChReGz;
+xSMIeFry->backNode = PJPDkTTt;
+FXChReGz->frontNode = HSftvEbR;
+FXChReGz->backNode = tOyMRejR;
+tOyMRejR->frontNode = WTgNAita;
+tOyMRejR->backNode = xiGNWdDS;
+xiGNWdDS->frontNode = aIeqfnEh;
+xiGNWdDS->backNode = ZNkXVgTZ;
+bbjDDbBV->frontNode = VLdiOknS;
+bbjDDbBV->backNode = FcsQNfdM;
+VLdiOknS->frontNode = wDMJbjwv;
+VLdiOknS->backNode = CHIJXXeJ;
+wDMJbjwv->frontNode = cKRWrOpH;
+wDMJbjwv->backNode = kdnDsgKf;
+CHIJXXeJ->frontNode = hjyFXVAZ;
+CHIJXXeJ->backNode = Qhflizzf;
+Qhflizzf->frontNode = GdPIDTRR;
+Qhflizzf->backNode = OhkfOxfv;
+GdPIDTRR->frontNode = ZStZYCJt;
+GdPIDTRR->backNode = moodVrFk;
+FcsQNfdM->frontNode = hdfcuNsH;
+FcsQNfdM->backNode = FKUqftZe;
+hdfcuNsH->frontNode = PmhpAFUy;
+hdfcuNsH->backNode = PUxBztME;
+FKUqftZe->frontNode = XXsHuRRd;
+FKUqftZe->backNode = JsTzGSPM;
+XXsHuRRd->frontNode = TkmggGQr;
+XXsHuRRd->backNode = IDQIeeTs;
+JsTzGSPM->frontNode = GxeXorCK;
+JsTzGSPM->backNode = vITIZYOM;
+GxeXorCK->frontNode = PWCwitSS;
+GxeXorCK->backNode = WMrwCdXf;
+PWCwitSS->frontNode = FdHDIXUS;
+PWCwitSS->backNode = rsCbRoac;
+rsCbRoac->frontNode = qCFjaxIQ;
+rsCbRoac->backNode = TjLbMacG;
+TjLbMacG->frontNode = YeNIZTpr;
+TjLbMacG->backNode = asmqZelT;
+asmqZelT->frontNode = XwmrnMSr;
+asmqZelT->backNode = APHoCejN;
+XwmrnMSr->frontNode = GXxcAbwa;
+XwmrnMSr->backNode = DWMyqofi;
+APHoCejN->frontNode = eIkEawGE;
+APHoCejN->backNode = LJachsSJ;
+WMrwCdXf->frontNode = xFuzJNCn;
+WMrwCdXf->backNode = dbvaYXwN;
+dbvaYXwN->frontNode = IptsTrlf;
+dbvaYXwN->backNode = OheVvCGy;
+IptsTrlf->frontNode = uLrNkhsy;
+IptsTrlf->backNode = TuIQspHJ;
+TuIQspHJ->frontNode = gJtllHIU;
+TuIQspHJ->backNode = teVlabUK;
+OheVvCGy->frontNode = IYmykvlI;
+OheVvCGy->backNode = sGVHBGZp;
+IYmykvlI->frontNode = rINfLNjV;
+IYmykvlI->backNode = levtYjTk;
+levtYjTk->frontNode = KwvDycZo;
+levtYjTk->backNode = XflXAGtp;
+XflXAGtp->frontNode = mycqkJmI;
+XflXAGtp->backNode = PInkzqce;
+PInkzqce->frontNode = GRsPQTlN;
+PInkzqce->backNode = jjBdnAko;
+sGVHBGZp->frontNode = NNpnDQMi;
+sGVHBGZp->backNode = hncUpqap;
 
-root = hTRfaRFl;
+root = KitZUmrQ;
 }
 };
 

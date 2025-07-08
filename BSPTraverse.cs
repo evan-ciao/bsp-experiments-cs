@@ -4,120 +4,11 @@ namespace BSP;
 
 class BSPTraverse
 {
-    private static Vector3 ClosestPointOnTriangle(Triangle t, Vector3 p)
+    public static BSPLeafState TraversePoint(BSPNode root, Vector3 point, out Vector3 correction)
     {
-        Vector3 ab = t.v2 - t.v1;
-        Vector3 ac = t.v3 - t.v1;
-        Vector3 ap = p - t.v1;
-
-        float d1 = Vector3.Dot(ab, ap);
-        float d2 = Vector3.Dot(ac, ap);
-        if (d1 <= 0 && d2 <= 0)
-            return t.v1;
-
-        Vector3 bp = p - t.v2;
-        float d3 = Vector3.Dot(ab, bp);
-        float d4 = Vector3.Dot(ac, bp);
-        if (d3 >= 0 && d4 <= d3)
-            return t.v2;
-
-        float vc = d1 * d4 - d3 * d2;
-        if (vc <= 0 && d1 >= 0 && d3 <= 0)
-        {
-            float v = d1 / (d1 - d3);
-            return t.v1 + v * ab;
-        }
-
-        Vector3 cp = p - t.v3;
-        float d5 = Vector3.Dot(ab, cp);
-        float d6 = Vector3.Dot(ac, cp);
-        if (d6 >= 0 && d5 <= d6)
-            return t.v3;
-
-        float vb = d5 * d2 - d1 * d6;
-        if (vb <= 0 && d2 >= 0 && d6 <= 0)
-        {
-            float v = d2 / (d2 - d6);
-            return t.v1 + v * ac;
-        }
-
-        float va = d3 * d6 - d5 * d4;
-        if (va <= 0 && (d4 - d3) >= 0 && (d5 - d6) >= 0)
-        {
-            float v = (d4 - d3) / ((d4 - d3) + (d5 - d6));
-            return t.v2 + v * (t.v3 - t.v2);
-        }
-
-        // outside face
-        float d = 1 / (va + vb + vc);
-        float w = vb * d;
-        float k = vc * d;
-        return t.v1 + ab * w + ac * k;
-    }
-
-    private static bool SphereIntersectsTriangles(Vector3 c, float r, List<Triangle> triangles)
-    {
-        float r2 = MathF.Pow(r, 2);
-
-        foreach (var t in triangles)
-        {
-            Vector3 p = ClosestPointOnTriangle(t, c);
-            Vector3 d = c - p;
-
-            if (d.LengthSquared() <= r2)
-                return true;
-        }
-
-        return false;
-    }
-
-    public static bool SphereTest(BSPNode root, ref BSPNode debugNode, Vector3 position, float radius, ref Vector3 collisionN, ref float penetration)
-    {
-        debugNode = root;
-
-        float mind = radius;
-        BSPNode closestNode = null;
-
-        while (debugNode != null && !debugNode.isLeaf)
-        {
-            float d = BSPTree.PlaneSignedDistance(position, debugNode.planeN, debugNode.planeD);
-
-            // found a colliding node
-            if (MathF.Abs(d) < mind)
-            {
-                mind = d;
-                closestNode = debugNode;
-            }
-
-            // otherwise
-            if (d >= 0)
-            {
-                // move to front
-                debugNode = debugNode.frontNode;
-            }
-            else
-            {
-                // move to back
-                debugNode = debugNode.backNode;
-            }
-
-        }
-
-        // test collision
-        if (closestNode != null && SphereIntersectsTriangles(position, radius, closestNode.coplanar))
-        {
-            collisionN = closestNode.planeN;
-            penetration = MathF.Abs(radius - mind);
-            return true;
-        }
-
-        // no collision
-        return false;
-    }
-    
-    public static BSPLeafState TraversePoint(BSPNode root, Vector3 point)
-    {
-        BSPNode node = root;
+        BSPNode node = (BSPNode)root.Clone();
+        Vector3 _bestNormal = Vector3.Zero;
+        float _bestDepth = -100;
 
         while (!node.isLeaf)
         {
@@ -126,9 +17,79 @@ class BSPTraverse
             if (d >= 0)
                 node = node.frontNode;
             else
+            {
+                if (d > _bestDepth)
+                {
+                    _bestNormal = node.planeN;
+                    _bestDepth = d;
+                }
+
                 node = node.backNode;
+            }
         }
 
+        correction = _bestNormal * -(_bestDepth);
+
         return node.state;
+    }
+
+    public static void CollidePoint(BSPNode root, ref Vector3 point)
+    {
+        Vector3 correction;
+        const int MAX_ITERATIONS = 8;
+        int i = 0;
+        while (TraversePoint(root, point, out correction) == BSPLeafState.SOLID)
+        {
+            point += correction;
+            i++;
+
+            if (i > MAX_ITERATIONS)
+                break;
+        }
+    }
+
+    public static bool RecursiveLineTrace(BSPNode node, Vector3 p1, Vector3 p2, out Vector3 intersection)
+    {
+        // handle leaves
+        if (node.isLeaf)
+        {
+            if (node.state == BSPLeafState.SOLID)
+            {
+                intersection = p1;
+                return true;
+            }
+            intersection = Vector3.NaN;
+            return false;
+        }
+        
+        // distances
+        float t1 = BSPTree.PlaneSignedDistance(p1, node.planeN, node.planeD);
+        float t2 = BSPTree.PlaneSignedDistance(p2, node.planeN, node.planeD);
+
+        // the line lies entirely within one of the two subspaces
+        if (t1 >= 0 && t2 >= 0)
+            return RecursiveLineTrace(node.frontNode, p1, p2, out intersection);
+        if (t1 < 0 && t2 < 0)
+            return RecursiveLineTrace(node.backNode, p1, p2, out intersection);
+
+        // straddle the plane
+        float denom = (t1 - t2);
+        if (Math.Abs(denom) < 1e-6f)
+        {
+            // parallel. bail on front side
+            return RecursiveLineTrace(node.frontNode, p1, p2, out intersection);
+        }
+
+        // line crosses different nodes
+        float frac = t1 / denom;    // intersection with the split plane
+        frac = Math.Clamp(frac, 0, 1);
+
+        Vector3 mid = p1 + frac * (p2 - p1);
+        bool keepBack = t1 < 0;
+
+        // split the problem
+        if (RecursiveLineTrace(keepBack ? node.backNode : node.frontNode, p1, mid, out intersection))
+            return true;
+        return RecursiveLineTrace(keepBack ? node.frontNode : node.backNode, mid, p2, out intersection);
     }
 }

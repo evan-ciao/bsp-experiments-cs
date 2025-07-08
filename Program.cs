@@ -75,9 +75,17 @@ class Program
 
         HPPExporter.TestExport(root);
 
-        // point test traversal
+        // point traversal test
         Vector3 point = Vector3.Zero;
+        Vector3 correction = Vector3.Zero;
         BSPLeafState pointState = BSPLeafState.UNASSIGNED;
+        bool collisionResponse = false;
+
+        // line tracing test
+        Vector3 p1 = Vector3.UnitX + Vector3.UnitY * 2;
+        Vector3 p2 = Vector3.UnitX;
+        Vector3 t = Vector3.NaN;
+        bool intersection = false;
 
         while (!Raylib.WindowShouldClose())
         {
@@ -87,7 +95,8 @@ class Program
                 Raylib.UpdateCamera(ref camera, CameraMode.Free);
 
             // traverse point
-            pointState = BSPTraverse.TraversePoint(root, point);
+            pointState = BSPTraverse.TraversePoint(root, point, out correction);
+
             if (Raylib.IsKeyDown(KeyboardKey.Up))
                 point.Z -= 2 * delta;
             if (Raylib.IsKeyDown(KeyboardKey.Down))
@@ -100,6 +109,15 @@ class Program
                 point.Y += 2 * delta;
             if (Raylib.IsKeyDown(KeyboardKey.PageDown))
                 point.Y -= 2 * delta;
+
+            if (collisionResponse)
+            {
+                point.Y -= 1 * delta;
+                BSPTraverse.CollidePoint(root, ref point);
+            }
+
+            // line tracing
+            intersection = BSPTraverse.RecursiveLineTrace(root, p1, p2, out t);
 
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.White);
@@ -132,7 +150,13 @@ class Program
                 );
             }
 
-            Raylib.DrawSphere(point, 0.05f, pointState == BSPLeafState.SOLID ? Color.Red : Color.Green);
+            Raylib.DrawSphereWires(point, 0.05f, 8, 8, pointState == BSPLeafState.SOLID ? Color.Red : Color.Green);
+
+            Raylib.DrawSphereWires(p1, 0.05f, 8, 8, Color.Blue);
+            Raylib.DrawSphereWires(p2, 0.05f, 8, 8, Color.Blue);
+            Raylib.DrawLine3D(p1, p2, Color.Blue);
+            if (intersection)
+                Raylib.DrawSphereWires(t, 0.05f, 8, 8, Color.DarkPurple);
 
             Raylib.EndMode3D();
 
@@ -163,6 +187,10 @@ class Program
                 ImGui.Text($"state {tree.state}");
                 ImGui.Text($"leaf id {tree.nodeID}");
             }
+            else
+            {
+                ImGui.Text($"node id {tree.nodeID}");
+            }
             if (tree != root)
             {
                 ImGui.Spacing();
@@ -175,6 +203,12 @@ class Program
             ImGui.Spacing();
             ImGui.SliderFloat3("point", ref point, -10, 10);
             ImGui.Text($"point is in {pointState}");
+            ImGui.Checkbox("collision response", ref collisionResponse);
+            ImGui.Text($"collision correction {correction}");
+            ImGui.Spacing();
+            ImGui.SliderFloat3("p1", ref p1, -10, 10);
+            ImGui.SliderFloat3("p2", ref p2, -10, 10);
+            ImGui.Text($"intersection {intersection}");
 
             ImGui.End();
 
